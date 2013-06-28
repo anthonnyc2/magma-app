@@ -104,23 +104,44 @@ define(['require', 'urls', 'languages', 'jquery', 'underscore', 'Backbone', 'vie
             		var lugar = obj['lugar'];
             		
             		/*
-					 * PRECIO
-					 */
-            		var evento_precio = obj['precio'];
-					var evento_precio_string;
-					if (evento_precio == 0) // Evento gratuito
-					{
-						evento_precio_string = lang.getString('eventos_detalle_precio_gratis').replace('<precio>', evento_precio);
-					}
-					else // Evento pagado
-					{
-						evento_precio_string = lang.getString('eventos_detalle_precio_simple').replace('<precio>', evento_precio);
-					}
+			* PRECIO
+			*/
+            		/*var evento_precio = obj['precio'];
+                        var evento_precio_string;
+			if (evento_precio == 0) // Evento gratuito
+			{
+                            evento_precio_string = lang.getString('eventos_detalle_precio_gratis').replace('<precio>', evento_precio);
+			}
+			else // Evento pagado
+			{
+                            evento_precio_string = lang.getString('eventos_detalle_precio_simple').replace('<precio>', evento_precio);
+			}*/
+                        
+                        
+            		
+            		// Formatear precio del evento
+            		var precio_raw = obj['precio'];
+                        var precio_raw=Math.round(precio_raw*100);
+                        
+            		var precio = precio_raw == 0 ?
+            			lang.getString('eventos_detalle_precio_gratis') // Evento gratuito
+            			:
+            			lang.getString('eventos_detalle_precio_simple').replace('<precio>', precio_raw) // Evento pagado
+            		;
+                        
+                        if(precio_raw != 0){
+                            var decimal = precio.substring(precio.length-4,precio.length);
+                            var entero = precio.substring(0,precio.length-4);
+                            precio = entero+","+decimal;
+                        }
+                        precio = precio.replace(/ /g,'');
 					
             		
             		// Formatear fecha de la forma DD/MM/AAAA
-            		var fechaTemp = obj['fecha_inicio'].split("-");
-            		var fecha = fechaTemp[2] + "/" + fechaTemp[1] + "/" + fechaTemp[0];
+            		var fechaTempInicio = obj['fecha_inicio'].split("-");
+            		var fecha = fechaTempInicio[2] + "/" + fechaTempInicio[1] + "/" + fechaTempInicio[0];
+            		var fechaTempFin = obj['fecha_fin'].split("-");
+            		var fechaFin = fechaTempFin[2] + "/" + fechaTempFin[1] + "/" + fechaTempFin[0];
             		
             		
             		var HTML = "<div class=\"destacados_home\"><a href=\"#detalleEvento\" class=\"ui-btn\" id=\"evento-" + i + "\">";
@@ -128,8 +149,11 @@ define(['require', 'urls', 'languages', 'jquery', 'underscore', 'Backbone', 'vie
             		HTML += "<div class=\"titulo\">" + titulo + "</div>";
             		HTML += "<img src=\"images/navigation/forward.jpg\" alt=\"\" />";
             		HTML += "<div class=\"lugar\">" + lang.getString('eventos_title_lugar') + ": " + lugar + "</div>"
-            		HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_fecha') + ": " + fecha + "</div>"
-            		HTML += "<div class=\"precio\">" + lang.getString('eventos_title_precio') + ": " + evento_precio_string + "</div>"
+                        if(fecha != fechaFin)
+                            HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_varios_dias_1') + " " + fecha + " " + lang.getString('eventos_title_varios_dias_2') + " " + fechaFin + "</div>"
+                        else
+                            HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_dia') + ": " + fecha + "</div>"
+            		HTML += "<div class=\"precio\">" + lang.getString('eventos_title_precio') + ": " + precio + "</div>"
             		HTML += "</a></div>";
             		
             		container.append(HTML);

@@ -38,7 +38,7 @@
 		</select>
 
 		   <select name="fecha" id="select-fecha">
-	      	<option value="fecha"><%= buscador_select_fecha %></option>
+	      	<!--<option value="fecha"><%= buscador_select_fecha %></option>-->
 	      	<option value="todos"><%= buscador_select_fecha_todoslosdias %></option>
 	      	<option value="1"><%= dia_lunes %></option>
 	      	<option value="2"><%= dia_martes %></option>
@@ -49,7 +49,7 @@
 	      	<option value="7"><%= dia_domingo %></option>
 			</select>
 			<select name="precio" id="select-rango_precio">
-	      	<option value="precio"><%= buscador_select_precio %></option>
+	      	<!--<option value="precio"><%= buscador_select_precio %></option>-->
 	      	<option value="todos"><%= buscador_select_todoslosprecios %></option>
 	      	<option value="gratis"><%= buscador_select_gratis %></option>
 	      	<option value="10-"><%= buscador_select_menosde10 %></option>

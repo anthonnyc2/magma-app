@@ -92,8 +92,8 @@ define(function() {
 		buscador_string_porpalabras : 'Per paraules',
 		buscador_string_porfiltros : 'Per filtres',
 		
-		buscador_select_categoria : 'Categoria',
-		buscador_select_municipio : 'Municipi',
+		buscador_select_categoria : 'Totes les categoríes',
+		buscador_select_municipio : 'Tots els municipis',
 		buscador_select_fecha : 'Data',
 		buscador_select_precio : 'Preu',
 		
@@ -126,6 +126,9 @@ define(function() {
 		eventos_title_categoria : 'Categoria',
 		eventos_title_lugar : 'Lloc',
 		eventos_title_fecha : 'Data',
+		eventos_title_dia : 'Dia',
+		eventos_title_varios_dias_1 : 'Entre el',
+		eventos_title_varios_dias_2 : 'i el',
 		eventos_title_precio : 'Preu',
 		
 		eventos_navbar_compartir : 'Compartir',
@@ -168,7 +171,7 @@ define(function() {
 		eventos_detalle_cuando_horas_simple : '<hora_inicio>h-<hora_final>h',
 		eventos_detalle_cuando_horas_doble : '<hora_inicio_1>h-<hora_final_1>h / <hora_inicio_2>h-<hora_final_2>h',
 		
-		eventos_detalle_precio_gratis : 'Event gratu&iuml;t',
+		eventos_detalle_precio_gratis : 'Gratis',
 		eventos_detalle_precio_simple : '<precio> €',
 		eventos_detalle_precio_doble : '<precio> € (<precio_anticipado> venda anticipada)',
 		
