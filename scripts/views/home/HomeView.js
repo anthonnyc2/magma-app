@@ -69,12 +69,14 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             		{
             			$this.destacadosList = resp;
             			
-            			$this.destacadosList.sort(function(a,b) {
+            			/*$this.destacadosList.sort(function(a,b) {
             				var A = new Date(a.fecha_inicio + " " + a.hora_inicio);
             				var B = new Date(b.fecha_inicio + " " + b.hora_inicio);
             				
             				return (A < B) ? -1 : ( (A > B) ? 1 : 0 );
-            			});
+            			});*/
+                            
+                                $this.destacadosList.reverse();
             			
             			// Cargar lista de eventos en el HTML
             			$this.loading = false;
