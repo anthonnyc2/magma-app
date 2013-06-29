@@ -57,7 +57,8 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             			categoria_esp : '',
             			categoria_cat : '',
             			subcategoria_esp : '',
-            			subcategoria_cat : ''
+            			subcategoria_cat : '',
+                              bandera_destacados: 0
             		}
             	});
             	
@@ -121,7 +122,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             redrawView:function() // Solo en la HomeView, que se carga antes de la selección de idioma y queda en background
             {
             	// Refrescar el título y fecha de la sección
-            	$(".barra_titulo_seccion .titulo_seccion").html(lang.getString("home_title"));
+            	$(".barra_titulo_seccion .titulo_seccion").html(lang.getString("destacados_title"));
             	$(".barra_titulo_seccion .date").html(lang.getDate());
             	
             	// Refrescar la barra de navegación
@@ -186,6 +187,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             	var index_evento = id_DOM.substring(7, id_DOM.length);
             	
             	var info_evento = this.destacadosList[index_evento];
+                  bandera_destacados = 1;
             	
             	var detalleEventoView = new DetalleEventoView(info_evento);
             	$.mobile.jqmNavigator.pushView(detalleEventoView, { transition : 'slide' });

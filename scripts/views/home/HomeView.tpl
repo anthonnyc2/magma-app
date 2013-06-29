@@ -4,7 +4,7 @@
 	<a href="#more" class="ui-btn-right more_button"><img src="images/navigation/more.png" alt="" /></a>
 	<a href="#home" class="magma_logo"><img src="images/navigation/magma_logo.png" alt="" /></a>
 	
-	<div class="barra_titulo_seccion"><div class="date"><%= fecha %></div><div class="titulo_seccion"><%= home_title %></div></div>
+	<div class="barra_titulo_seccion"><div class="date"><%= fecha %></div><div class="titulo_seccion"><%= destacados_title %></div></div>
 </div>
 <!-- FIN: HOME - header -->
 

@@ -167,6 +167,7 @@ define(['require', 'urls', 'languages', 'jquery', 'underscore', 'Backbone', 'vie
             	var index_evento = id_DOM.substring(7, id_DOM.length);
             	
             	var info_evento = this.lista_favoritos[index_evento];
+                bandera_destacados = 0;
             	
             	var detalleEventoView = new DetalleEventoView(info_evento);
             	$.mobile.jqmNavigator.pushView(detalleEventoView, { transition : 'slide' });

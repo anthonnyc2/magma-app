@@ -73,6 +73,18 @@
 		evento_precio_string = eventos_detalle_precio_simple.replace('<precio>', evento_precio);
 	}
 	
+	/*
+	* Detectar si viene desde Destacados
+	*/
+
+	var tituto_detalle = '';
+	if(bandera_destacados == 1){
+		tituto_detalle = destacados_title;
+		bandera_destacados = 0;
+	}
+	else
+		tituto_detalle = eventos_detalle_titulo;
+	
 	
 	var evento_telefono = detalles_evento['telf'];
 	var evento_email = detalles_evento['email'];
@@ -86,7 +98,7 @@
 	
 	<a class="magma_logo" href="#home"><img src="images/navigation/magma_logo.png" alt="" /></a>
 	
-	<div class="barra_titulo_seccion"><div class="date"><%= fecha %></div><div class="titulo_seccion"><%= eventos_detalle_titulo %></div></div>
+	<div class="barra_titulo_seccion"><div class="date"><%= fecha %></div><div class="titulo_seccion"><%= tituto_detalle %></div></div>
 </div>
 <!-- FIN: HOME - header -->
 

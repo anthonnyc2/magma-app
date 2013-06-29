@@ -1,4 +1,4 @@
-<!-- HOME - header -->
+	<!-- HOME - header -->
 <div data-role="header" data-id="categorias-header" id="categorias-header" data-position="fixed">
 	<a data-rel="back" href="#categorias"><img src="images/navigation/back.jpg" alt="" /></a>
 	<a href="#more" class="ui-btn-right more_button"><img src="images/navigation/more.png" alt="" /></a>
@@ -23,12 +23,12 @@
 	<form id="buscador_form" action="#" method="post" data-ajax="false">
 		<div data-role="fieldcontain">
             <fieldset data-role="controlgroup">
-                <label for="searchinput1"><%= buscador_string_porpalabras %></label>
+                  <label for="searchinput1"> <strong><%= buscador_string_porpalabras %></strong> </label>
                 <input name="buscador-field_palabras" id="buscador-field_palabras" placeholder="" value="" type="search">
             </fieldset>
         </div>	
 		
-		<label for="select-categorias" class="select"><%= buscador_string_porfiltros %></label>
+		<label for="select-categorias" class="select"> <strong><%= buscador_string_porfiltros %></strong> </label>
 		<select name="categorias" id="select-categorias">
 			<option value="categoria" data-placeholder="true"><div class="book"><%= buscador_select_categoria %></div></option>
 		</select>

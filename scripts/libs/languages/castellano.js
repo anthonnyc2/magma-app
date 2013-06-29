@@ -37,7 +37,7 @@ define(function() {
 		
 		more_button_idioma : 'Idioma',
 		more_button_informacion : 'Informaci&oacute;n',
-		more_info_app : '<b>Magma Agenda de Mallorca</b><br />es una app gratuita, para iOS y Android, que te permite estar al d&iacute;a de los distintos eventos y actividades culturales que se realizan en la isla. Puedes echar un vistazo a todo lo que hay publicado o consultar por categor&iacute;as, realizar b&uacute;squedas personalizadas, a&ntilde;adir eventos a tus Favoritos, localizarlos en el mapa y compartirlos con tus amigos.<br /><br />Y si quieres que tus eventos aparezcan en la app, entra en nuestra web<br /><b>www.publicaenmagma.es</b><br/>y &iexcl;empieza a publicar!',
+		more_info_app : '<b>Magma Agenda de Mallorca</b><br />es una app gratuita, para iOS y Android, que te permite estar al d&iacute;a de los distintos eventos y actividades culturales que se realizan en la isla. Puedes echar un vistazo a todo lo que hay publicado o consultar por categor&iacute;as, realizar b&uacute;squedas personalizadas, a&ntilde;adir eventos a tus Favoritos, localizarlos en el mapa y compartirlos con tus amigos.<br /><br />Y si quieres que tus eventos aparezcan en la app, entra en nuestra web<br /><b>(www.publicaenmagma.es)</b><br/>y &iexcl;empieza a publicar!',
 		
 		
 		

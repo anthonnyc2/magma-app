@@ -218,6 +218,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             	var index_evento = id_attr.substring(7, id_attr.length);
             	
             	var info_evento = this.lista_resultados[index_evento];
+                  bandera_destacados = 0;
             	
 			var detalleEventoView = new DetalleEventoView(info_evento);
             	$.mobile.jqmNavigator.pushView(detalleEventoView, { transition: 'slide' });
