@@ -95,7 +95,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/buscador
             	var ClaseVista = null;
             	
             	var moduleFile = itemHref == "#categorias" ? "views/categorias/CategoriasView" : ( itemHref == "#favoritos" ? "views/favoritos/FavoritosView" : null );
-            	
+                
             	if (moduleFile)
             	{
             		ClaseVista = require(moduleFile);
@@ -131,13 +131,13 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/buscador
             			});
             			
             			// Agregar elemento "Todas las categorías"
-		    			/*var allCategoriesEl = {
+		    			var allCategoriesEl = {
 		    				id: -1
 		    			};
 		    			allCategoriesEl["categoria_" + lang.getString('language_suffix')] = lang.getString('categorias_allcategories');
 		    			$this.lista_categorias.unshift(allCategoriesEl);
 		    			
-		    			$this.redrawView();*/
+		    			$this.redrawView();
             		}
             	});
             	

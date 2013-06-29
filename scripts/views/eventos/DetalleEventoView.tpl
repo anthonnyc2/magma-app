@@ -19,7 +19,6 @@
 	temp_fechafin.reverse();
 	var evento_fechainicio = temp_fechainicio.join("/");
 	var evento_fechafin = temp_fechafin.join("/");
-        alert(evento_fechafin);
 	
 	var evento_string_fechas;
 	if (evento_fechainicio == evento_fechafin) // Una sola fecha
@@ -28,7 +27,7 @@
 	}
 	else // Fecha de inicio y final diferentes
 	{
-		evento_string_fechas = eventos_detalle_cuando_fecha_doble.replace("<fecha_inicio>", evento_fechainicio).replace("<fecha_fin>", evento_fechafin);
+		evento_string_fechas = eventos_detalle_cuando_fecha_doble.replace("<fecha_inicio>", evento_fechainicio).replace("<fecha_final>", evento_fechafin);
 	}
 	
 	
@@ -64,7 +63,6 @@
 	 * PRECIO
 	 */
 	var evento_precio = detalles_evento['precio'];
-        evento_precio=Math.round(evento_precio*100);
 	var evento_precio_string;
 	if (evento_precio == 0) // Evento gratuito
 	{
@@ -74,13 +72,6 @@
 	{
 		evento_precio_string = eventos_detalle_precio_simple.replace('<precio>', evento_precio);
 	}
-        
-        if(evento_precio != 0){
-            var decimal = evento_precio_string.substring(evento_precio_string.length-4,evento_precio_string.length);
-            var entero = evento_precio_string.substring(0,evento_precio_string.length-4);
-            evento_precio_string = entero+","+decimal;
-        }
-        evento_precio_string = evento_precio_string.replace(/ /g,'');
 	
 	
 	var evento_telefono = detalles_evento['telf'];
@@ -111,7 +102,7 @@
 <div data-role="content" id="detalleEvento-content">
 	
 	<div class="evento_titulo"><%= evento_titulo %></div>
-	<div class="evento_categoria">- <%= evento_categoria %> -</div>
+	<div class="evento_categoria">. <%= evento_categoria %> .</div>
 	<div class="evento_imagen"><%= evento_imagen %></div>
 	<div class="evento_descripcion"><%= evento_descripcion %></div>
 	

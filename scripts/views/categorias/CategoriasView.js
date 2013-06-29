@@ -91,7 +91,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/categori
             	var ClaseVista = null;
             	
             	var moduleFile = itemHref == "#favoritos" ? "views/favoritos/FavoritosView" : ( itemHref == "#buscador" ? "views/buscador/BuscadorView" : null );
-            	
+             
             	if (moduleFile)
             	{
             		ClaseVista = require(moduleFile);

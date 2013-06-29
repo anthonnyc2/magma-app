@@ -85,8 +85,11 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/categori
             	var itemHref = $(event.currentTarget).attr('href');
             	var ClaseVista = null;
             	
-            	var moduleFile = itemHref == "#favoritos" ? "views/favoritos/FavoritosView" : ( itemHref == "#buscador" ? "views/buscador/BuscadorView" : null );
-            	
+                  var moduleFile = itemHref == "#categorias" ? "views/categorias/CategoriasView" : ( itemHref == "#favoritos" ? "views/favoritos/FavoritosView" : null ) ;
+                  if(itemHref == "#buscador"){
+                        moduleFile = "views/buscador/BuscadorView";
+                  }
+                                          
             	if (moduleFile)
             	{
             		ClaseVista = require(moduleFile);

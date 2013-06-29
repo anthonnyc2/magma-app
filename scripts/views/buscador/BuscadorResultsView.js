@@ -22,7 +22,9 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
                 'click .ui-header a.magma_logo' : 'Home_clickHandler',
                 'click .more_button' : 'More_clickHandler',
                 'click a[data-rel=back]' : 'btnBack_clickHandler',
-                'click div.destacados_home a' : 'subcat_clickHandler'
+                'click div.destacados_home a' : 'subcat_clickHandler',
+                'click .ui-footer .ui-navbar ul li a' : 'navBar_clickHandler',
+                
             },
             
             More_clickHandler:function(evt)
@@ -44,7 +46,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             	$this.dias = _dias;
             	$this.rangoPrecio = _rango_precio;
             	$this.lista_resultados = [];
-                
+            	
             	var EventosModel = Backbone.Model.extend({
             		defaults: {
             			id: 0,
@@ -82,27 +84,28 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             	});
             	
             	var url_peticion = urls.busqueda.replace('<string_busqueda>', $this.string_busqueda);
-
-                var EventosCollection = Backbone.Collection.extend({
+            	
+            	var EventosCollection = Backbone.Collection.extend({
             		model	: EventosModel,
-            		url	: url_peticion,
+            		url		: url_peticion,
+            		
             		parse:function(resp)
             		{
             			$this.lista_resultados = [];
-                                
-				for (var i in resp)
+
+						for (var i in resp)
             			{
             				var obj = resp[i];
             				
-            				// Para filtro por categorías (sin seleccionar categoría = todas las categorías = -1)
-            				var categorias_match = $this.idCategoria == "categoria" || $this.idCategoria == -1 || obj['categoriasId'] == $this.idCategoria;
-            				 
-            				// Para filtro por días
+            				// Para filtro por categor√≠as (sin seleccionar categor√≠a = todas las categor√≠as = -1)
+            				var categorias_match = $this.idCategoria == "categoria" || $this.idCategoria == -1 || obj['categoriaId'] == $this.idCategoria;
+            				
+            				// Para filtro por d√≠as
             				var dias = obj['dias_semana'].split(",");
-            				var dias_match = $this.dias == "todos" || $this.dias == "fecha"; // Sin seleccionar día = todos los días
+            				var dias_match = $this.dias == "todos" || $this.dias == "fecha"; // Sin seleccionar d√≠a = todos los d√≠as
             				for (var j = 0; !dias_match && j < dias.length; j++) // No entra si dia_match = true
             				{
-            					if ( dias[j] == $this.dias ) dias_match = true; // Hay match de días
+            					if ( dias[j] == $this.dias ) dias_match = true; // Hay match de d√≠as
             				}
             				
             				// Para filtro por precios (sin seleccionar precio = todos los precios)
@@ -122,7 +125,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             				}
             			}
             			
-            			// Ordenar por fecha y hora de inicio, más cercanos primero
+            			// Ordenar por fecha y hora de inicio, m√°s cercanos primero
             			$this.lista_resultados.sort(function(a,b) {
             				var A = new Date(a.fecha_inicio + " " + a.hora_inicio);
             				var B = new Date(b.fecha_inicio + " " + b.hora_inicio);
@@ -147,8 +150,28 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
 
             btnBack_clickHandler:function(evt)
             {
-            	evt.preventDefault();
+                  evt.preventDefault();
             	$.mobile.jqmNavigator.popView();
+            },
+
+            navBar_clickHandler:function(event)
+            {
+                  event.preventDefault();
+                  var itemHref = $(event.currentTarget).attr('href');
+                  var ClaseVista = null;
+                  
+                  var moduleFile = itemHref == "#categorias" ? "views/categorias/CategoriasView" : ( itemHref == "#favoritos" ? "views/favoritos/FavoritosView" : null ) ;
+                  if(itemHref == "#buscador"){
+                        moduleFile = "views/buscador/BuscadorView";
+                  }
+                                          
+                  if (moduleFile)
+                  {
+                        ClaseVista = require(moduleFile);
+                        var newView = new ClaseVista();
+                        $.mobile.jqmNavigator.popToFirst({ transition : 'none' });
+                        $.mobile.jqmNavigator.pushView(newView);
+                  }
             },
             
             Home_clickHandler:function(evt)
@@ -156,7 +179,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             	evt.preventDefault();
             	$.mobile.jqmNavigator.popToFirst();
             },
-            
+
             redrawView: function()
             {
             	var content = $("#eventresults-content");
@@ -169,43 +192,19 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             		var categorias = obj["categoria_" + lang.getString('language_suffix')];
             		var titulo = obj["titulo_" + lang.getString('language_suffix')];
             		var lugar = obj['lugar'];
-            		
-            		// Formatear precio del evento
-            		var precio_raw = obj['precio'];
-                        var precio_raw=Math.round(precio_raw*100);
-                        
-            		var precio = precio_raw == 0 ?
-            			lang.getString('eventos_detalle_precio_gratis') // Evento gratuito
-            			:
-            			lang.getString('eventos_detalle_precio_simple').replace('<precio>', precio_raw) // Evento pagado
-            		;
-                        
-                        if(precio_raw != 0){
-                            var decimal = precio.substring(precio.length-4,precio.length);
-                            var entero = precio.substring(0,precio.length-4);
-                            precio = entero+","+decimal;
-                        }
-                        precio = precio.replace(/ /g,'');
-                        
-                        
-            		//var precio = obj['precio'] > 0 ? lang.getString('eventos_detalle_precio_simple').replace("<precio>", obj['precio']) : lang.getString('eventos_detalle_precio_gratis');
+            		var precio = obj['precio'] > 0 ? lang.getString('eventos_detalle_precio_simple').replace("<precio>", obj['precio']) : lang.getString('eventos_detalle_precio_gratis');
             		
             		// Formatear fecha de la forma DD/MM/AAAA
-            		var fechaTempInicio = obj['fecha_inicio'].split("-");
-            		var fecha = fechaTempInicio[2] + "/" + fechaTempInicio[1] + "/" + fechaTempInicio[0];
-            		var fechaTempFin = obj['fecha_fin'].split("-");
-            		var fechaFin = fechaTempFin[2] + "/" + fechaTempFin[1] + "/" + fechaTempFin[0];
+            		var fechaTemp = obj['fecha_inicio'].split("-");
+            		var fecha = fechaTemp[2] + "/" + fechaTemp[1] + "/" + fechaTemp[0];
             		
             		var HTML = "<div class=\"destacados_home\"><a href=\"#detalleEvento\" class=\"ui-btn\" id=\"evento-" + i + "\">";
-            		HTML += "<div class=\"categorias\">" + lang.getString('eventos_title_categoria') + ": <div class=\"lista_categorias\">" + categorias + "</div></div>";
+            		HTML += "<div class=\"categorias\">" + "<div class=\"lista_categorias\">" + categorias + "</div></div>";
             		HTML += "<div class=\"titulo\">" + titulo + "</div>";
             		HTML += "<img src=\"images/navigation/forward.jpg\" alt=\"\" />";
-            		HTML += "<div class=\"lugar\">" + lang.getString('eventos_title_lugar') + ": " + lugar + "</div>"
-                        if(fecha != fechaFin)
-                            HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_varios_dias_1') + " " + fecha + " " + lang.getString('eventos_title_varios_dias_2') + " " + fechaFin + "</div>"
-                        else
-                            HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_dia') + ": " + fecha + "</div>"
-            		HTML += "<div class=\"precio\">" + lang.getString('eventos_title_precio') + ": " + precio + "</div>"
+            		HTML += "<div class=\"lugar\">" + lugar + "</div>"
+            		HTML += "<div class=\"fecha\">" + fecha + "</div>"
+            		HTML += "<div class=\"precio\">" + precio + "</div>"
             		HTML += "</a></div>";
             		
             		content.append(HTML);
@@ -220,7 +219,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/eventos/
             	
             	var info_evento = this.lista_resultados[index_evento];
             	
-				var detalleEventoView = new DetalleEventoView(info_evento);
+			var detalleEventoView = new DetalleEventoView(info_evento);
             	$.mobile.jqmNavigator.pushView(detalleEventoView, { transition: 'slide' });
             }
 

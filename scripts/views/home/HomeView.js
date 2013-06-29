@@ -69,14 +69,12 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             		{
             			$this.destacadosList = resp;
             			
-            			/*$this.destacadosList.sort(function(a,b) {
+            			$this.destacadosList.sort(function(a,b) {
             				var A = new Date(a.fecha_inicio + " " + a.hora_inicio);
             				var B = new Date(b.fecha_inicio + " " + b.hora_inicio);
             				
             				return (A < B) ? -1 : ( (A > B) ? 1 : 0 );
-            			});*/
-                            
-                                $this.destacadosList.reverse();
+            			});
             			
             			// Cargar lista de eventos en el HTML
             			$this.loading = false;
@@ -110,7 +108,7 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             	var newView = new dstClass();
             	
             	if (dstClass !== undefined) $.mobile.jqmNavigator.pushView(newView);
-            	else alert('Aún no implementado.');
+            	else alert('A√∫n no implementado.');
             },
             
             More_clickHandler:function(evt)
@@ -120,13 +118,13 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             	$.mobile.jqmNavigator.pushView(moreView, { transition: 'pop' });
             },
             
-            redrawView:function() // Solo en la HomeView, que se carga antes de la selección de idioma y queda en background
+            redrawView:function() // Solo en la HomeView, que se carga antes de la selecci√≥n de idioma y queda en background
             {
-            	// Refrescar el título y fecha de la sección
+            	// Refrescar el t√≠tulo y fecha de la secci√≥n
             	$(".barra_titulo_seccion .titulo_seccion").html(lang.getString("home_title"));
             	$(".barra_titulo_seccion .date").html(lang.getDate());
             	
-            	// Refrescar la barra de navegación
+            	// Refrescar la barra de navegaci√≥n
             	var navBarLinks = $(".ui-footer .ui-navbar ul li a");
             	navBarLinks.each(function() {
             		var hrefText = $(this).attr('href').substring(1, $(this).attr('href').length);
@@ -157,38 +155,24 @@ define(['urls', 'languages', 'jquery', 'underscore', 'Backbone', 'views/more/Mor
             		
             		// Formatear precio del evento
             		var precio_raw = obj['precio'];
-                        var precio_raw=Math.round(precio_raw*100);
-                        
             		var precio = precio_raw == 0 ?
             			lang.getString('eventos_detalle_precio_gratis') // Evento gratuito
             			:
             			lang.getString('eventos_detalle_precio_simple').replace('<precio>', precio_raw) // Evento pagado
             		;
-                        
-                        if(precio_raw != 0){
-                            var decimal = precio.substring(precio.length-4,precio.length);
-                            var entero = precio.substring(0,precio.length-4);
-                            precio = entero+","+decimal;
-                        }
-                        precio = precio.replace(/ /g,'');
             		
             		// Formatear fecha de la forma DD/MM/AAAA
-            		var fechaTempInicio = obj['fecha_inicio'].split("-");
-            		var fecha = fechaTempInicio[2] + "/" + fechaTempInicio[1] + "/" + fechaTempInicio[0];
-            		var fechaTempFin = obj['fecha_fin'].split("-");
-            		var fechaFin = fechaTempFin[2] + "/" + fechaTempFin[1] + "/" + fechaTempFin[0];
+            		var fechaTemp = obj['fecha_inicio'].split("-");
+            		var fecha = fechaTemp[2] + "/" + fechaTemp[1] + "/" + fechaTemp[0];
             		
             		
             		var HTML = "<div class=\"destacados_home\"><a href=\"#detalleEvento\" class=\"ui-btn\" id=\"evento-" + i + "\">";
-            		HTML += "<div class=\"categorias\">" + lang.getString('eventos_title_categoria') + ": <div class=\"lista_categorias\">" + categorias + "</div></div>";
+            		HTML += "<div class=\"categorias\">" + "<div class=\"lista_categorias\">" + categorias + "</div></div>";
             		HTML += "<div class=\"titulo\">" + titulo + "</div>";
             		HTML += "<img src=\"images/navigation/forward.jpg\" alt=\"\" />";
-            		HTML += "<div class=\"lugar\">" + lang.getString('eventos_title_lugar') + ": " + lugar + "</div>"
-                        if(fecha != fechaFin)
-                            HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_varios_dias_1') + " " + fecha + " " + lang.getString('eventos_title_varios_dias_2') + " " + fechaFin + "</div>"
-                        else
-                            HTML += "<div class=\"fecha\">" + lang.getString('eventos_title_dia') + ": " + fecha + "</div>"
-            		HTML += "<div class=\"precio\">" + lang.getString('eventos_title_precio') + ": " + precio + "</div>"
+            		HTML += "<div class=\"lugar\">" + lugar + "</div>"
+            		HTML += "<div class=\"fecha\">" + fecha + "</div>"
+            		HTML += "<div class=\"precio\">" + precio + "</div>"
             		HTML += "</a></div>";
             		
             		container.append(HTML);

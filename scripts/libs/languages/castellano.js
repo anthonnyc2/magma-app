@@ -92,8 +92,8 @@ define(function() {
 		buscador_string_porpalabras : 'Por palabras',
 		buscador_string_porfiltros : 'Por filtros',
 		
-		buscador_select_categoria : 'Todas las categorías',
-		buscador_select_municipio : 'Todos los municipios',
+		buscador_select_categoria : 'Categoría',
+		buscador_select_municipio : 'Municipio',
 		buscador_select_fecha : 'Fecha',
 		buscador_select_precio : 'Precio',
 		
@@ -125,9 +125,6 @@ define(function() {
 		eventos_title_categoria : 'Categoría',
 		eventos_title_lugar : 'Lugar',
 		eventos_title_fecha : 'Fecha',
-		eventos_title_dia : 'Día',
-		eventos_title_varios_dias_1 : 'Entre el',
-		eventos_title_varios_dias_2 : 'y el',
 		eventos_title_precio : 'Precio',
 		
 		eventos_navbar_compartir : 'Compartir',
@@ -170,7 +167,7 @@ define(function() {
 		eventos_detalle_cuando_horas_simple : '<hora_inicio>h-<hora_final>h',
 		eventos_detalle_cuando_horas_doble : '<hora_inicio_1>h-<hora_fin_1>h / <hora_inicio_2>h-<hora_fin_2>h',
 		
-		eventos_detalle_precio_gratis : 'Gratis',
+		eventos_detalle_precio_gratis : 'Evento gratuito',
 		eventos_detalle_precio_simple : '<precio> €',
 		eventos_detalle_precio_doble : '<precio> € (<precio_anticipado> venta anticipada)',
 		
